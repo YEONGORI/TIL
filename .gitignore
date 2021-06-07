@@ -1,0 +1,4 @@
+.venv/
+settings.py
+secrets.json
+node_modules
