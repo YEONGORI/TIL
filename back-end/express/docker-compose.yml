@@ -1,0 +1,14 @@
+version: '1'
+services:
+  web:
+    image: nodejs
+    ports:
+      - 80:80
+    links:
+      - mongo:db
+    command: server -DFOREGROUND
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example

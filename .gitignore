@@ -3,3 +3,4 @@ settings.py
 secrets.json
 node_modules
 .vscode
+vscode

@@ -16,7 +16,7 @@ checkDuplicatedUserid = (req, res, next) => {
         }
         next();
     })
-}
+};
 
 checkRoleExisted = (req, res, next) => {
     if (req.body.roles) {
@@ -29,7 +29,8 @@ checkRoleExisted = (req, res, next) => {
             }
         }
     }
-}
+    next();
+};
 
 
 const verfiySignUp = {

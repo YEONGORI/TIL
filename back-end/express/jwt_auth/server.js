@@ -4,20 +4,23 @@ const cors = require("cors");
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const bodyparser = require('body-parser')
 
-const authRouter = require('./routes/auth_routes');
-const usersRouter = require('./routes/user_routes');
+
+const connectionString = "mongodb+srv://testgori:test@cluster0.iygr4xp.mongodb.net/?retryWrites=true&w=majority"
 
 const app = express();
 const corsOptions = {
   origin: "http://localhost:8080"
 };
 const db = require("./models/index");
-const dbConfig = require('./config/db_config');
+
+
 const Role = require('./models/role_model');
 const role = db.role();
 
-db.mongoose.connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
+
+db.mongoose.connect(connectionString, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }).then(()=> {
@@ -28,25 +31,25 @@ db.mongoose.connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`
         name: "admin"
       }).save((err) => {
         if (err)
-          console.log("admin 생성 오류", err);
+        console.log("admin 생성 오류", err);
         else
-          console.log("role collection에 admin추가 완료")
+        console.log("role collection에 admin추가 완료")
       });
       new Role({
         name: "manager"
       }).save((err) => {
         if (err)
-          console.log("manager 생성 오류", err);
+        console.log("manager 생성 오류", err);
         else
-          console.log("role collection에 manager추가 완료")
+        console.log("role collection에 manager추가 완료")
       });
       new Role({
         name: "employee"
       }).save((err) => {
         if (err)
-          console.log("employee 생성 오류", err);
+        console.log("employee 생성 오류", err);
         else
-          console.log("role collection에 employee추가 완료")
+        console.log("role collection에 employee추가 완료")
       })
     }
   })
@@ -65,9 +68,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyparser.json())
 
-// app.use('/', authRouter);
-// app.use('/users', usersRouter);
+require("./routes/auth_routes")(app);
+require("./routes/user_routes")(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
