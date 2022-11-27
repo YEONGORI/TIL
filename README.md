@@ -1,5 +1,3 @@
 # TIL
 
-Today I Learn for web
-
-WEB
+Today I Learn
