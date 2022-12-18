@@ -6,3 +6,6 @@ node_modules
 vscode
 gitignore
 .gitignore
+public/downloads
+public
+/home/yeongori/workspace/TIL/back-end/express/extract_file_path/public
