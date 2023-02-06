@@ -1,6 +1,6 @@
-package com.cad.searh_service.domain.dto;
+package com.cad.searh_service.entity.memberDto;
 
-import com.cad.searh_service.domain.Member;
+import com.cad.searh_service.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

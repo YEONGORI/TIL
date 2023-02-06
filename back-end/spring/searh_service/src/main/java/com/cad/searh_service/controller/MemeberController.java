@@ -1,6 +1,6 @@
 package com.cad.searh_service.controller;
 
-import com.cad.searh_service.domain.dto.*;
+import com.cad.searh_service.entity.memberDto.*;
 import com.cad.searh_service.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,13 +18,23 @@ public class MemeberController {
 
     @PostMapping("/register")
     public ResponseEntity<MemberRegisterResponse> register(@RequestBody MemberRegisterRequest memeberRegisterRequest) {
-        MemberDto memberDto = memberService.register(memeberRegisterRequest);
-        return new ResponseEntity<>(new MemberRegisterResponse(memberDto.getEmployName()), HttpStatus.OK);
+        try {
+            MemberDto memberDto = memberService.register(memeberRegisterRequest);
+            return new ResponseEntity<>(new MemberRegisterResponse(memberDto.getEmployName()), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PostMapping("/login")
     public ResponseEntity<MemberLoginResponse> login(@RequestBody MemberLoginRequest memberLoginRequest) {
-        String token = memberService.login(memberLoginRequest.getEmployNumber(), memberLoginRequest.getPassword());
-        return new ResponseEntity<>(new MemberLoginResponse(token), HttpStatus.OK);
+        try {
+            String token = memberService.login(memberLoginRequest.getEmployNumber(), memberLoginRequest.getPassword());
+            return new ResponseEntity<>(new MemberLoginResponse(token), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

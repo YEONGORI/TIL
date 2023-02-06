@@ -1,4 +1,4 @@
-package com.cad.searh_service.domain;
+package com.cad.searh_service.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -16,10 +16,13 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(name = "employnumber", unique = true)
     private String employNumber;
+    @Column(name = "employname")
     private String employName;
+    @Column(name = "phonenumber")
     private String phoneNumber;
     private String password;
+    @Column(name = "adminkey")
     private String adminKey;
 }

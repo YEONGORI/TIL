@@ -1,13 +1,12 @@
 package com.cad.searh_service.service;
 
-import com.cad.searh_service.domain.Member;
-import com.cad.searh_service.domain.dto.MemberDto;
-import com.cad.searh_service.domain.dto.MemberRegisterRequest;
+import com.cad.searh_service.entity.Member;
+import com.cad.searh_service.entity.memberDto.MemberDto;
+import com.cad.searh_service.entity.memberDto.MemberRegisterRequest;
 import com.cad.searh_service.repository.MemberRepository;
 import com.cad.searh_service.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
