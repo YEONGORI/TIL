@@ -2,27 +2,22 @@ package com.cad.searh_service.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.TextScore;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
+@Data
 @Builder
-@Entity
+@Document(collection = "cad")
 public class Cad {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
     private String author;
-    @Column(name = "maincategory")
     private String mainCategory;
-    @Column(name = "subcategory")
     private String subCategory;
+    @TextScore
     private String title;
     private String index;
-    @Column(name = "s3url")
     private String s3Url;
-    @Column(name = "created")
     private String createdAt;
-    @Column(name = "updated")
     private String updatedAt;
 }
