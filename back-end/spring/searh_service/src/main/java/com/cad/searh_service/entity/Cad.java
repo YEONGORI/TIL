@@ -4,12 +4,12 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.TextScore;
 
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
 @Builder
-@Document(collection = "cad")
+@Entity
 public class Cad {
     @Id
     private String id;
