@@ -7,5 +7,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CadRepository extends JpaRepository<Cad, Long> {
-//    Optional<Cad>
+    List<Cad> findByMainCategoryContainingOrSubCategoryContainingOrTitleContainingOrIndexContaining(String mainCategory, String subCategory, String title, String index);
 }

@@ -2,6 +2,9 @@ package com.cad.searh_service.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.joda.time.DateTime;
+
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,10 +22,10 @@ public class Cad {
     private String subCategory;
     private String title;
     private String index;
-    @Column(name = "s3url")
-    private String s3Url;
+    @Column(name = "imgUrl")
+    private String imgUrl;
     @Column(name = "created")
-    private String createdAt;
+    private LocalDateTime createdAt;
     @Column(name = "updated")
-    private String updatedAt;
+    private LocalDateTime updatedAt;
 }

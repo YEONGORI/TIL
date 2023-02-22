@@ -46,6 +46,12 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Log 종속성 추가 -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+
         <!-- JPA 종속성 추가 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -92,6 +98,23 @@
             <groupId>com.aspose</groupId>
             <artifactId>aspose-cad</artifactId>
             <version>20.9</version>
+        </dependency>
+
+        <!-- aws 종속성 추가 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-aws</artifactId>
+            <version>2.2.6.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-s3</artifactId>
+            <version>1.11.792</version>
+        </dependency>
+        <dependency>
+            <groupId>software.amazon.awssdk</groupId>
+            <artifactId>s3-transfer-manager</artifactId>
+            <version>2.19.26</version>
         </dependency>
 
     </dependencies>

@@ -9,7 +9,11 @@ import com.aspose.cad.fileformats.cad.cadobjects.CadMText;
 import com.aspose.cad.fileformats.cad.cadobjects.CadText;
 import com.aspose.cad.imageoptions.CadRasterizationOptions;
 import com.aspose.cad.imageoptions.JpegOptions;
-import com.aspose.cad.internal.B.B;
+import com.cad.searh_service.controller.CadController;
+import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -20,14 +24,13 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
+@RequiredArgsConstructor
+@Component
 public class AsposeUtil {
+    private final S3Util s3Util;
+    private final Logger log = LoggerFactory.getLogger(CadController.class);
     private static final String cadDir = System.getProperty("user.home") + "cad" + File.separator;
-    private static final String imgDir = System.getProperty("user.home") + "img" + File.separator;
 
     public Map<String, String[]> getCadInfo(String project) {
         try {
@@ -38,48 +41,37 @@ public class AsposeUtil {
                     if (!Files.isDirectory(file) && file.getFileName().toString().contains(".dwg")) {
                         String title = file.getFileName().toString();
                         String path = file.toAbsolutePath().toString();
-                        Set<String> index = extractCadIndex(path);
+                        String index = extractCadIndex(path);
                         ByteArrayOutputStream stream = convertCadToJpeg(path);
-                        cadInfo.put()
+                        String s3Url = s3Util.uploadImg(title, stream);
+                        path = path.substring(path.indexOf(project) + project.length(), path.indexOf(title) -1);
+                        cadInfo.put(index, new String[] {path, title, s3Url});
                     }
                     return FileVisitResult.CONTINUE;
                 }
             });
             return cadInfo;
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("getCadInfo IOException: ", e);
+            return null;
         }
-        return null;
     }
 
     private ByteArrayOutputStream convertCadToJpeg(String cad) {
-        try {
             Image image = Image.load(cad);
             CadRasterizationOptions options = new CadRasterizationOptions();
             options.setPageHeight(200);
             options.setPageWidth(200);
 
             JpegOptions jpegOptions = new JpegOptions();
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
             jpegOptions.setVectorRasterizationOptions(options);
 
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-
-            ExecutorService executor = Executors.newCachedThreadPool();
-            Callable<Object> task = new Callable<Object>() {
-                @Override
-                public Object call() throws Exception {
-                    image.save(stream, jpegOptions);
-                    return stream;
-                }
-            };
-            Future<Object> future = executor.submit(task);
-            executor.shutdown();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            image.save(stream, jpegOptions);
+            return stream;
     }
 
-    private Set<String> extractCadIndex(String cad) {
+    private String extractCadIndex(String cad) {
         try {
             Set<String> index = new HashSet<>();
             CadImage cadImage = (CadImage) CadImage.load(cad);
@@ -95,7 +87,7 @@ public class AsposeUtil {
                     }
                 }
             }
-            return index;
+            return String.join(" | ", index);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -103,7 +95,7 @@ public class AsposeUtil {
     }
 
     private String filterCadIndex(String index) {
-        String filtered = index.replace(" ", "");
+        String filtered = index.replaceAll(" ", "");
         int numCnt = (int) filtered.chars().filter(c -> c >= '0' && c <= '9').count();
         if (numCnt >= filtered.length() / 2)
             return "";

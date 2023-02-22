@@ -14,15 +14,13 @@ public class SecurityConfig{
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .httpBasic().disable() // 기본 인증 이용 x
-                .csrf().disable().headers().frameOptions().disable()
-                .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 인증 정보를 서버에 담지 않음(JWT)
-                .and()
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/member/*").permitAll().anyRequest().authenticated());
-
-
+            .httpBasic().disable() // 기본 인증 이용 x
+            .csrf().disable().headers().frameOptions().disable()
+            .and()
+            .sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 인증 정보를 서버에 담지 않음(JWT)
+            .and()
+            .authorizeHttpRequests(auth -> auth.requestMatchers("/cad/data").permitAll().anyRequest().authenticated());
         return http.build();
     }
 
