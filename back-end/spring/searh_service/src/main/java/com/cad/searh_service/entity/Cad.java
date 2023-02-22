@@ -2,23 +2,19 @@ package com.cad.searh_service.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.joda.time.DateTime;
 
 import java.time.LocalDateTime;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.TextScore;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
+@Data
 @Builder
-@Entity
+@Document(collection = "cad")
 public class Cad {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
     private String author;
-    @Column(name = "maincategory")
     private String mainCategory;
-    @Column(name = "subcategory")
     private String subCategory;
     private String title;
     private String index;
@@ -28,4 +24,5 @@ public class Cad {
     private LocalDateTime createdAt;
     @Column(name = "updated")
     private LocalDateTime updatedAt;
+
 }
