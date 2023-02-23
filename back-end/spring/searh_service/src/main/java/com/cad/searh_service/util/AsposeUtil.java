@@ -30,7 +30,7 @@ import java.util.Set;
 public class AsposeUtil {
     private final S3Util s3Util;
     private final Logger log = LoggerFactory.getLogger(CadController.class);
-    private static final String cadDir = System.getProperty("user.home") + "cad" + File.separator;
+    private static final String cadDir = System.getProperty("user.home") + File.separator + "cad" + File.separator;
 
     public Map<String, String[]> getCadInfo(String project) {
         try {

@@ -12,17 +12,20 @@ import java.time.LocalDateTime;
 @Entity
 public class Cad {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     private String author;
+    @Column(name = "maincategory")
     private String mainCategory;
+    @Column(name = "subcategory")
     private String subCategory;
     private String title;
+    @Column(name = "cadindex")
     private String index;
-    @Column(name = "imgUrl")
+    @Column(name = "imgurl")
     private String imgUrl;
-    @Column(name = "created")
+    @Column(name = "createdat")
     private LocalDateTime createdAt;
-    @Column(name = "updated")
+    @Column(name = "updatedat")
     private LocalDateTime updatedAt;
-
 }
