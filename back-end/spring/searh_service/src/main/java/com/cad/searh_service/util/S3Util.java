@@ -46,11 +46,11 @@ public class S3Util {
     @Value("${cloud.aws.s3.key}")
     public String key;
 
-    public void downloadFolder(String dir) {
+    public void downloadFolder(String project) {
         try {
             File s3Dir = new File("s3-download");
-            String tmp = URLDecoder.decode(dir, StandardCharsets.UTF_8);
-            MultipleFileDownload download = transferManager.downloadDirectory(bucket, tmp, s3Dir);
+            project = URLDecoder.decode(project, StandardCharsets.UTF_8);
+            MultipleFileDownload download = transferManager.downloadDirectory(bucket, project, s3Dir);
 
             DecimalFormat decimalFormat = new DecimalFormat("##0.00");
 
