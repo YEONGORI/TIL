@@ -1,4 +1,4 @@
-package com.cad.searh_service.entity.memberDto;
+package com.cad.searh_service.dto.memberDto;
 
 import com.cad.searh_service.entity.Member;
 import lombok.AllArgsConstructor;

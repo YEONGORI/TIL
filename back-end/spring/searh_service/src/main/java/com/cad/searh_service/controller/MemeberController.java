@@ -1,6 +1,6 @@
 package com.cad.searh_service.controller;
 
-import com.cad.searh_service.entity.memberDto.*;
+import com.cad.searh_service.dto.memberDto.*;
 import com.cad.searh_service.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;

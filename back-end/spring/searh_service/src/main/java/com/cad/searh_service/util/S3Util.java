@@ -55,15 +55,12 @@ public class S3Util {
             DecimalFormat decimalFormat = new DecimalFormat("##0.00");
 
             while (!download.isDone()) {
-                Thread.sleep(1000);
                 TransferProgress progress = download.getProgress();
                 double percent = progress.getPercentTransferred();
                 System.out.println("[ download ]" + decimalFormat.format(percent) + "% download progressing ...");
             }
         } catch (AmazonServiceException e) {
             log.error("Amazon service exception: ", e);
-        } catch (InterruptedException e) {
-            log.error("Interrupted exception: ", e);
         }
     }
 

@@ -1,8 +1,8 @@
 package com.cad.searh_service.service;
 
 import com.cad.searh_service.entity.Member;
-import com.cad.searh_service.entity.memberDto.MemberDto;
-import com.cad.searh_service.entity.memberDto.MemberRegisterRequest;
+import com.cad.searh_service.dto.memberDto.MemberDto;
+import com.cad.searh_service.dto.memberDto.MemberRegisterRequest;
 import com.cad.searh_service.repository.MemberRepository;
 import com.cad.searh_service.util.JwtUtil;
 import lombok.RequiredArgsConstructor;

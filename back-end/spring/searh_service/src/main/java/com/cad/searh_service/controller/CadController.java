@@ -1,8 +1,7 @@
 package com.cad.searh_service.controller;
 
 import com.cad.searh_service.entity.Cad;
-import com.cad.searh_service.entity.cadDto.CadSaveRequest;
-import com.cad.searh_service.entity.cadDto.CadSearchResponse;
+import com.cad.searh_service.dto.cadDto.CadSaveRequest;
 import com.cad.searh_service.service.CadService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
