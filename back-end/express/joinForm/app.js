@@ -10,7 +10,10 @@ var usersRouter = require('./routes/users');
 var join = require('./routes/joinForm');
 var board = require('./routes/board');
 
+const db = require('./models');
+
 var app = express();
+db.sequelize.sync();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

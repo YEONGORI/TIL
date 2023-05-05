@@ -9,7 +9,7 @@
         <h1><%= title %></h1>
         <form action="/board/update" method="post" enctype="multipart/form-data" onsubmit="return onWriteSubmit()">
             <table border="1">
-                <input type="hidden" name="idx" value="<%=row.idx%>" />
+                <input type="hidden" name="id" value="<%=row.id%>" />
                 <tr>
                     <td>작성자</td>
                     <td><input type="text" name="creator_id" id="creator_id" value="<%=row.creator_id%>" required /></td>

@@ -1,8 +1,8 @@
-let express = require('express');
-let multer = require('multer');
-let path = require('path');
+const express = require('express');
+const multer = require('multer');
+const path = require('path');
+const router = express.Router();
 
-let router = express.Router();
 let listController = require('../controllers/listController');
 let writeController = require('../controllers/writeController');
 let readController = require('../controllers/readController');
@@ -21,18 +21,23 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage: storage});
 
-router.get('/', listController.getList);
+router.get('/', listController.getListFirst);
+router.get('/list/:id', listController.getList);
+
 router.get('/write', writeController.writeForm);
 router.post('/write', upload.single("image"), (req, res) => {
     writeController.writeData(req, res)
 });
-router.get('/read/:idx', readController.readData);
+
+router.get('/read/:id', readController.readData);
+
 router.get('/update', updateController.updateForm);
 router.post('/update', multer().none(), (req, res) => {
     updateController.updateData(req, res)
 });
+
 router.post('/delete', (req, res) => {
     deleteController.deleteData(req, res);
 });
 
-module.exports=router;
+module.exports = router;
