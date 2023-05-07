@@ -22,9 +22,9 @@
         var oneItem = rows[i];
 %>
       <tr>
-        <td><%=oneItem.idx%></td>
+        <td><%=oneItem.id%></td>
         <td><%=oneItem.creator_id%></td>
-        <td><a href="/board/read/<%=oneItem.idx%>"><%=oneItem.title%></a></td>
+        <td><a href="/board/read/<%=oneItem.id%>"><%=oneItem.title%></a></td>
         <td><%=oneItem.hit%></td>
       </tr>
 <%

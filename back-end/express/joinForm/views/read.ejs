@@ -10,7 +10,7 @@
     <h1><%= title %></h1>
     <form action="/board/update" method="get">
         <table border="1">
-            <input type="hidden", name="idx", value="<%=row.idx%>" />
+            <input type="hidden", name="id", value="<%=row.id%>" />
             <tr>
                 <td>작성자</td>
                 <td><%=row.creator_id%></td>
@@ -40,7 +40,7 @@
         </table>
     </form>
     <form action="/board/delete/" method="post">
-        <input type="hidden", name="idx", value="<%=row.idx%>" />
+        <input type="hidden", name="id", value="<%=row.id%>" />
         <button type="submit">글 삭제</button>
     </form>
 </body>

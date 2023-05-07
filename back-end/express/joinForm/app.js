@@ -1,18 +1,18 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser')
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser')
+const logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var join = require('./routes/joinForm');
-var board = require('./routes/board');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const join = require('./routes/joinForm');
+const board = require('./routes/board');
 
 const db = require('./models');
 
-var app = express();
+const app = express();
 db.sequelize.sync();
 
 // view engine setup
@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+// app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/join', join);
 app.use('/board', board);

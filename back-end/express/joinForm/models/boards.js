@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     content: DataTypes.STRING,
     passwd: DataTypes.STRING,
+    image: DataTypes.STRING,
     hit: DataTypes.INTEGER
   }, {
     sequelize,
